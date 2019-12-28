@@ -22,16 +22,23 @@ ageChangedHandler=(event=>{
   }) 
 })
 
-  switchNameHandler=(newName)=>{
-    this.setState({
-      persons:[
-        {name:newName, age:19},
-        {name:'Avinash', age: 20},
-        {},
-      ]
-    })                       //to have changes in state property
+
+  deletePersonHandler=(personIndex)=>{
+    console.log("deleted"+personIndex);
+    const persons=this.state.persons;
+    persons.splice(personIndex,1);
+    this.setState({persons:persons})
   }
-// HOOKS change value
+//   switchNameHandler=(newName)=>{
+//     this.setState({
+//       persons:[
+//         {name:newName, age:19},
+//         {name:'Avinash', age: 20},
+//         {},
+//       ]
+//     })                       //to have changes in state property
+//   }
+// // HOOKS change value
 
 togglePersonHandler=()=>{
   const doesShow=this.state.showPerson;
@@ -51,17 +58,12 @@ togglePersonHandler=()=>{
     if(this.state.showPerson){
       personsexist=(
         <div>
-          <Person 
-          name={this.state.persons[0].name} 
-          age={this.state.persons[0].age}/>                          
-          <Person 
-          name={this.state.persons[1].name} 
-          age={this.state.persons[1].age}
-          click={this.switchNameHandler.bind(this,"Tatya Vichu")}                     // to pass the variable we can use bind or we an use what we did above with button onclick
-          changed={this.ageChangedHandler}>show me da way</Person> 
-          <Person 
-          name={this.state.persons[2].name} 
-          age={this.state.persons[2].age}/>  
+          {this.state.persons.map((person, index)=>{
+            return <Person 
+            click={()=>this.deletePersonHandler(index)}
+            name={person.name}
+            age={person.age}/>
+          })}
         </div>
       );
     }
