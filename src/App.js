@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
 
+
 class App extends Component {
   state={
     persons:[
@@ -22,7 +23,7 @@ nameChangedHandler=(event, id)=>{
 
   //const person=Object.assign({}, this.state.person[personIndex])   can also use this
   
-  person.name= event.target.value;
+  person.name= event.target.value; 
 
   const persons=[...this.state.persons];
   persons[personIndex]=person;
@@ -40,28 +41,20 @@ nameChangedHandler=(event, id)=>{
     persons.splice(personIndex,1);
     this.setState({persons:persons})
   }
-//   switchNameHandler=(newName)=>{
-//     this.setState({
-//       persons:[
-//         {name:newName, age:19},
-//         {name:'Avinash', age: 20},
-//         {},
-//       ]
-//     })                       //to have changes in state property
-//   }
-// // HOOKS change value
 
 togglePersonHandler=()=>{
   const doesShow=this.state.showPerson;
   this.setState({showPerson: !doesShow});
 }
-  render() {
+  render() { 
     const style={
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: "white",
       font: 'inherit',
-      border: '10px solid blue',
+      border: '5px solid blue',
       padding: '8px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      
     }
 
     let personsexist=null;
@@ -79,17 +72,26 @@ togglePersonHandler=()=>{
           })}
         </div>
       );
+
+      style.backgroundColor="red";
     }
 
+    const classes=[];
+    if(this.state.persons.length<=2){
+      classes.push('red');    //classs=['red']
+    }
+    if(this.state.persons.length<=1){
+      classes.push('bold');   //classes=['red','bold']
+    }
 
-    return (                                //this is jsx not html so class word cannot be used
+    return (        
       <div className="App">                 
         <h1>Helllo world</h1>  
-        <p>does this works?Should be a paragrapgh</p>  
+        <p className={classes.join(' ')}>More the Merrier</p>  
         <button style={style} onClick={this.togglePersonHandler}>Switch Name</button>
   
         {personsexist}
-      </div>
+      </div>     
     );
   }
 }
