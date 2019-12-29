@@ -48,17 +48,9 @@ togglePersonHandler=()=>{
   this.setState({showPerson: !doesShow});
 }
   render() { 
-    const style={
-      backgroundColor: 'green',
-      color: "white",
-      font: 'inherit',
-      border: '5px solid blue',
-      padding: '8px',
-      cursor: 'pointer',
-      
-    }
 
     let personsexist=null;
+    let btnClass='';
 
     if(this.state.showPerson){
       personsexist=(
@@ -73,8 +65,7 @@ togglePersonHandler=()=>{
           })}
         </div>
       );
-
-      style.backgroundColor="red";
+      btnClass=styles.red; 
     }
 
     const classes=[];
@@ -89,7 +80,7 @@ togglePersonHandler=()=>{
       <div className={styles.App }>                 
         <h1>Helllo world</h1>  
         <p className={classes.join(' ')}>More the Merrier</p>  
-        <button style={style} onClick={this.togglePersonHandler}>Switch Name</button>
+        <button className={btnClass}  onClick={this.togglePersonHandler}>Switch Name</button>
   
         {personsexist}
       </div>     
