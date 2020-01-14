@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styles from './App.module.css';
-import Person from './Person/Person';
+import Person from '../components/Persons/Person/Person';
 
 
 
@@ -46,7 +46,7 @@ nameChangedHandler=(event, id)=>{
 togglePersonHandler=()=>{
   const doesShow=this.state.showPerson;
   this.setState({showPerson: !doesShow});
-}
+} 
   render() { 
 
     let personsexist=null;
