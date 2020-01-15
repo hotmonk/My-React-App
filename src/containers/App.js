@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styles from './App.module.css';
-import Person from '../components/Persons/Person/Person';
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 
 
@@ -50,38 +51,23 @@ togglePersonHandler=()=>{
   render() { 
 
     let personsexist=null;
-    let btnClass='';
+ 
 
     if(this.state.showPerson){
-      personsexist=(
-        <div>
-          {this.state.persons.map((person, index)=>{
-            return <Person 
-            click={()=>this.deletePersonHandler(index)}
-            name={person.name}
-            age={person.age}
-            key={person.id}
-            changed={(event)=>this.nameChangedHandler(event,person.id)}/>
-          })}
-        </div>
-      );
-      btnClass=styles.red; 
+      personsexist=<Persons persons={this.state.persons}
+          clicked={this.deletePersonHandler}
+          changed={this.nameChangedHandler}/>;
+
     }
 
-    const classes=[];
-    if(this.state.persons.length<=2){
-      classes.push(styles.red);    //classs=['red']
-    }
-    if(this.state.persons.length<=1){
-      classes.push(styles.bold);   //classes=['red','bold']
-    }
 
     return (        
       <div className={styles.App }>                 
-        <h1>Helllo world</h1>  
-        <p className={classes.join(' ')}>More the Merrier</p>  
-        <button className={btnClass}  onClick={this.togglePersonHandler}>Switch Name</button>
-  
+        <Cockpit 
+        title={this.props.appTitle}
+        showPersons={this.state.showPerson}
+        persons={this.state.persons}
+        clicked={this.togglePersonHandler}   />
         {personsexist}
       </div>     
     );
